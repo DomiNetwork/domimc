@@ -95,7 +95,7 @@ code { font-family: var(--f-mono); font-size: 0.88em; background: var(--soft); b
 .item p { color: var(--muted); font-size: 15px; }
 
 .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
-table { width: 100%; border-collapse: collapse; min-width: 620px; font-size: 15px; }
+table { width: 100%; border-collapse: collapse; min-width: 700px; font-size: 15px; }
 th, td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
 th { font-size: 13px; color: var(--muted); font-weight: 600; background: var(--soft); }
 tr:last-child td { border-bottom: 0; }
@@ -103,6 +103,7 @@ td.num { font-variant-numeric: tabular-nums; }
 .rank { font-weight: 800; white-space: nowrap; }
 .r-vip { color: var(--r-vip); } .r-vipp { color: var(--r-vipp); } .r-domi { color: var(--r-domi); } .r-domip { color: var(--r-domip); } .r-dom { color: var(--r-dom); } .r-domp { color: var(--r-domp); }
 .note { margin-top: 12px; color: var(--muted); font-size: 15px; }
+td.price { font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
 
 .shop { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 26px; }
 .shop p { color: var(--muted); margin-top: 6px; max-width: 54ch; }
@@ -187,18 +188,19 @@ a:focus-visible, .btn:focus-visible { outline: 3px solid var(--accent); outline-
     </div>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Rango</th><th>Kit diario</th><th>Cheque</th><th>Mochilas</th><th>Extra</th></tr></thead>
+        <thead><tr><th>Rango</th><th>Kit diario</th><th>Cheque</th><th>Mochilas</th><th>Extra</th><th>Precio</th></tr></thead>
         <tbody>
-          <tr><td class="rank r-vip">VIP</td><td>Equipo Tier 4</td><td class="num">$2.000</td><td class="num">4</td><td>—</td></tr>
-          <tr><td class="rank r-vipp">VIP+</td><td>Equipo Tier 6</td><td class="num">$5.000</td><td class="num">5</td><td>—</td></tr>
-          <tr><td class="rank r-domi">Domi</td><td>Equipo Tier 8</td><td class="num">$10.000</td><td class="num">7</td><td>—</td></tr>
-          <tr><td class="rank r-domip">Domi+</td><td>Equipo Tier 10</td><td class="num">$15.000</td><td class="num">9</td><td>Viaje directo a la Mina OP</td></tr>
-          <tr><td class="rank r-dom">Dominican</td><td>Equipo Tier 12, 16 manzanas y 8 perlas</td><td class="num">$25.000</td><td class="num">14</td><td>Lo mismo que Domi+</td></tr>
-          <tr><td class="rank r-domp">Dominican+</td><td>Equipo Tier 13, 2 manzanas encantadas y 16 perlas</td><td class="num">$40.000</td><td class="num">25</td><td>Lo mismo que Domi+</td></tr>
+          <tr><td class="rank r-vip">VIP</td><td>Equipo Tier 4</td><td class="num">$2.000</td><td class="num">4</td><td>—</td><td class="price">US$2.50</td></tr>
+          <tr><td class="rank r-vipp">VIP+</td><td>Equipo Tier 6</td><td class="num">$5.000</td><td class="num">5</td><td>—</td><td class="price">US$5</td></tr>
+          <tr><td class="rank r-domi">Domi</td><td>Equipo Tier 8</td><td class="num">$10.000</td><td class="num">7</td><td>—</td><td class="price">US$8</td></tr>
+          <tr><td class="rank r-domip">Domi+</td><td>Equipo Tier 10</td><td class="num">$15.000</td><td class="num">9</td><td>Viaje directo a la Mina OP</td><td class="price">US$12</td></tr>
+          <tr><td class="rank r-dom">Dominican</td><td>Equipo Tier 12, 16 manzanas y 8 perlas</td><td class="num">$25.000</td><td class="num">14</td><td>Lo mismo que Domi+</td><td class="price">US$18</td></tr>
+          <tr><td class="rank r-domp">Dominican+</td><td>Equipo Tier 13, 2 manzanas encantadas y 16 perlas</td><td class="num">$40.000</td><td class="num">25</td><td>Lo mismo que Domi+</td><td class="price">US$25</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="note">Sin rango tienes el Kit Inicio y 2 mochilas. Del Tier 14 al 17 solo se llega jugando.</p>
+    <p class="note">Todos los rangos son permanentes y se pagan una sola vez. Sin rango tienes el Kit Inicio y 2 mochilas. Del Tier 14 al 17 solo se llega jugando.</p>
+    <p class="note"><a class="js-tienda" href="#tienda">Comprar un rango en la tienda</a></p>
   </section>
 
   <section class="block" id="tienda">
@@ -223,7 +225,7 @@ a:focus-visible, .btn:focus-visible { outline: 3px solid var(--accent); outline-
 
 <script>
 /* Cuando exista la tienda de Tebex, pon aquí su link (por ejemplo "https://domimc.tebex.io") */
-var TIENDA = "";
+var TIENDA = "https://domimc.tebex.io";
 var IP = "domimc.xyz";
 
 function aviso(t) {
@@ -248,7 +250,7 @@ if (TIENDA) {
   document.querySelectorAll(".js-tienda").forEach(function (a) { a.href = TIENDA; a.target = "_blank"; a.rel = "noopener"; });
   var b = document.getElementById("btn-tienda");
   b.textContent = "Ir a la tienda"; b.classList.remove("btn-line"); b.classList.add("btn-main");
-  document.getElementById("tienda-txt").textContent = "Compra un rango y te llega solo al juego en unos segundos.";
+  document.getElementById("tienda-txt").textContent = "Compra un rango con tarjeta, PayPal y más. Pon tu nombre de Minecraft (si juegas en Bedrock, con un punto adelante, como .TuNombre) y el rango te llega solo al juego en unos segundos.";
 } else {
   document.getElementById("btn-tienda").addEventListener("click", function (e) { e.preventDefault(); aviso("La tienda abre pronto"); });
 }
